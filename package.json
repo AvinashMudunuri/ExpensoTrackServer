@@ -1,0 +1,48 @@
+{
+  "name": "expensotrackserver",
+  "version": "1.0.0",
+  "description": "Personal Expense Tracker Server",
+  "main": "infrastructure/server.js",
+  "scripts": {
+    "start": "nodemon --watch infrastructure --watch infrastructure/server.js",
+    "start:prod": "pm2 start infrastructure/server.js --name ExpensoTrack --env production",
+    "stop:prod": "pm2 stop ExpensoTrack",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "mocha --recursive",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AvinashMudunuri/ExpensoTrackServer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AvinashMudunuri/ExpensoTrackServer/issues"
+  },
+  "homepage": "https://github.com/AvinashMudunuri/ExpensoTrackServer#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
+    "helmet": "^7.1.0",
+    "mongoose": "^8.4.4",
+    "xss-clean": "^0.1.4"
+  },
+  "devDependencies": {
+    "chai": "^4.4.1",
+    "chai-http": "^4.4.0",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "mocha": "^10.5.2",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.2",
+    "winston": "^3.13.0"
+  }
+}
