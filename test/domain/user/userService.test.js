@@ -1,6 +1,9 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const { connectTestDB, disconnectDB } = require('../../../infrastructure/database');
+const {
+  connectTestDB,
+  disconnectDB,
+} = require('../../../infrastructure/database');
 
 const User = require('../../../domain/user/models/user');
 const userService = require('../../../domain/user/services/userService');
