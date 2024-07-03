@@ -1,5 +1,5 @@
 const userRepository = require('../repositories/userRepository');
-
+const { redisClient } = require('../../../infrastructure/redis');
 class UserService {
   async createUser(data) {
     const existingUser = await userRepository.findByEmail(data.email);
@@ -14,6 +14,8 @@ class UserService {
   async getUserById(id) {
     const user = await userRepository.getUserById(id);
     if (user) {
+      const key = `user::${id}`;
+      await redisClient.set(key, JSON.stringify(user), 'EX', 3600); // Cache for 1 hour
       return user;
     } else {
       throw new Error('User with this id doesnot exists');

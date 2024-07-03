@@ -5,6 +5,11 @@ const {
   disconnectDB,
 } = require('../../../infrastructure/database');
 
+const {
+  deleteRedisKey,
+  disconnectRedis,
+} = require('../../../infrastructure/redis');
+
 const User = require('../../../domain/user/models/user');
 const userService = require('../../../domain/user/services/userService');
 
@@ -19,11 +24,16 @@ describe('User Service', function () {
 
   before(async () => {
     await connectTestDB();
+    const user = await User.findOne({ email: 'john@example.com' });
+    if (user) {
+      await deleteRedisKey(`user::${user._id}`);
+    }
     await User.deleteMany({});
   });
 
   after(async () => {
     await disconnectDB();
+    await disconnectRedis();
   });
 
   describe('Create User', () => {

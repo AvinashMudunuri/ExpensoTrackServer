@@ -20,16 +20,18 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
-// app.use(auth);
+
 if (config.env === 'test') {
   connectTestDB().then(() => logger.info('Test Connection Success!!'));
 } else {
   connectDB().then(() => logger.info('Connection Success!!'));
 }
-// connectDB().then(() => logger.info('Connection Success!!'));
+
 const userRoutes = require('../routes/userRoutes');
+const healthRoutes = require('../routes/healthCheckRoutes');
 
 app.use('/api/users', userRoutes);
+app.use('/health', healthRoutes);
 
 app.get('/', (req, res) => {
   res.send('ExpensoTracker API');
