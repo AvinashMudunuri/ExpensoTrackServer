@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const { logger } = require('./logger');
+const config = require('../config/config');
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    logger.info('Database Connected', process.env.MONGODB_URI);
+    await mongoose.connect(config.mongoURI);
+    logger.info('Database Connected');
   } catch (err) {
     logger.error('Failed to connect', err);
     process.exit(1);
@@ -12,10 +13,8 @@ const connectDB = async () => {
 
 const connectTestDB = async () => {
   try {
-    await mongoose.connect(
-      'mongodb+srv://amudunuri:RXVXMAGfvg4L1yXU@expensecluster.dyqqo0p.mongodb.net/ExpensoTrack_test'
-    );
-    logger.info('Database Connected');
+    await mongoose.connect(config.mongoURITest);
+    logger.info('Test Database Connected');
   } catch (err) {
     logger.error('Failed to connect', err);
     process.exit(1);
