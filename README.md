@@ -69,14 +69,21 @@ A Node.js application for tracking personal expenditures, including modes of pay
 
 ### User Endpoints
 
-- **Create User**: `POST /api/users`
+- **Create User**: `POST /api/users/auth/register`
 
-  - Request Body: `{ "name": "John Doe", "email": "john@example.com" }`
+  - Request Body: `{ "name": "John Doe", "email": "john@example.com", "password": "password123" }`
   - Response: `201 Created`
+
+- **Login User**: `POST /api/users/auth/login`
+
+  - Request Body: `{ "email": "john@example.com", "password": "password123" }`
+  - Response: `200 Created`
 
 - **Get All Users**: `GET /api/users`
   - Response: `200 OK`, returns an array of users
 
+- **Get User**: `GET /api/users/:id`
+  - Response: `200 OK`, returns user
 ### Account Endpoints
 
 - **Create Account**: `POST /api/accounts`
