@@ -80,10 +80,12 @@ A Node.js application for tracking personal expenditures, including modes of pay
   - Response: `200 Created`
 
 - **Get All Users**: `GET /api/users`
+
   - Response: `200 OK`, returns an array of users
 
 - **Get User**: `GET /api/users/:id`
   - Response: `200 OK`, returns user
+
 ### Account Endpoints
 
 - **Create Account**: `POST /api/accounts`
