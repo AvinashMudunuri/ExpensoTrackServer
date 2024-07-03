@@ -5,4 +5,4 @@ module.exports = {
   mongoURI: process.env.MONGODB_URI,
   mongoURITest: process.env.MONGODB_URI_TEST,
   jwtSecret: process.env.JWT_SECRET,
-}
+};

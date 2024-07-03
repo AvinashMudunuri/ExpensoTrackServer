@@ -1,17 +1,16 @@
 const userService = require('../domain/user/services/userService');
 class UserController {
-
   async login(req, res) {
     try {
       const { email, password } = req.body;
       const token = await userService.login(email, password);
       res.status(200).json({
-        token
-      })
+        token,
+      });
     } catch (ex) {
       res.status(400).json({
-        error: ex.message
-      })
+        error: ex.message,
+      });
     }
   }
 
@@ -20,7 +19,7 @@ class UserController {
       const user = await userService.createUser(req.body);
       res.status(201).json({
         msg: 'User registered successfully',
-        data: user
+        data: user,
       });
     } catch (ex) {
       res.status(400).send({ error: ex.message });
@@ -39,12 +38,11 @@ class UserController {
   async getUserById(req, res) {
     try {
       const user = await userService.getUserById(req.params.id);
-      res.status(200).json(user)
+      res.status(200).json(user);
     } catch (ex) {
-      res.status(500).send({ error: ex.message })
+      res.status(500).send({ error: ex.message });
     }
   }
-
 }
 
 module.exports = new UserController();

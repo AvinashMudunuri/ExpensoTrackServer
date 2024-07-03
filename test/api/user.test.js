@@ -2,9 +2,7 @@
 
 const request = require('supertest');
 const app = require('../../infrastructure/server'); // Assume your Express app is exported from app.js or server.js
-const {
-  disconnectDB,
-} = require('../../infrastructure/database');
+const { disconnectDB } = require('../../infrastructure/database');
 const User = require('../../domain/user/models/user');
 
 const chai = require('chai');
@@ -15,7 +13,7 @@ describe(`User API's`, function () {
   let token;
   let userId;
   this.timeout(TEST_TIMEOUT);
-  
+
   before(async () => {
     await User.deleteMany({});
   });
@@ -48,7 +46,6 @@ describe(`User API's`, function () {
       });
   });
 
-  
   it('POST /api/users/auth/login', (done) => {
     request(app)
       .post('/api/users/auth/login')

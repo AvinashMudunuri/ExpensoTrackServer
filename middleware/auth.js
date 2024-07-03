@@ -6,10 +6,13 @@ const auth = (req, res, next) => {
   const token = req.header('Authorization');
 
   // Check if token is not present
-  if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
+  if (!token)
+    return res.status(401).json({ msg: 'No token, authorization denied' });
 
   // Remove 'Bearer' from the token if present
-  const actualToken = token.startsWith('Bearer ') ? token.slice(7, token.length).trimLeft() : token;
+  const actualToken = token.startsWith('Bearer ')
+    ? token.slice(7, token.length).trimLeft()
+    : token;
 
   try {
     // Verify token
@@ -22,9 +25,9 @@ const auth = (req, res, next) => {
     });
   } catch (ex) {
     res.status(401).json({
-      msg: 'Token is not valid'
+      msg: 'Token is not valid',
     });
   }
-}
+};
 
 module.exports = auth;
