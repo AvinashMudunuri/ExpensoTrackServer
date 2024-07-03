@@ -40,6 +40,7 @@
     "mongoose": "^8.4.4",
     "pm2": "^5.4.1",
     "redis": "^4.6.15",
+    "winston": "^3.13.0",
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
@@ -52,7 +53,6 @@
     "mocha": "^10.5.2",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.2",
-    "supertest": "^7.0.0",
-    "winston": "^3.13.0"
+    "supertest": "^7.0.0"
   }
 }
