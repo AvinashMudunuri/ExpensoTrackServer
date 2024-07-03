@@ -5,9 +5,9 @@ const { logger } = require('./logger');
 const redisClient = redis.createClient({
   password: config.redis.password,
   socket: {
-      host: config.redis.host,
-      port: config.redis.port
-  }
+    host: config.redis.host,
+    port: config.redis.port,
+  },
 });
 
 const deleteRedisKey = async (key) => {
@@ -31,7 +31,7 @@ const checkRedisConnection = async () => {
     logger.info('Redis Connection error', err);
     return false;
   }
-} 
+};
 
 const disconnectRedis = async () => {
   try {
@@ -44,11 +44,11 @@ const disconnectRedis = async () => {
 
 redisClient.on('error', (err) => {
   logger.info('Redis Error', err);
-})
+});
 
 redisClient.on('connect', (err) => {
   logger.info('Redis Connection Successfully', err);
-})
+});
 
 redisClient.connect().catch((ex) => logger.info('Redis Error', ex));
 
@@ -56,5 +56,5 @@ module.exports = {
   redisClient,
   checkRedisConnection,
   deleteRedisKey,
-  disconnectRedis
+  disconnectRedis,
 };

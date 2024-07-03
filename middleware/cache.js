@@ -13,10 +13,10 @@ const cacheMiddleware = (keyPrefix) => async (req, res, next) => {
     next();
   } catch (ex) {
     logger.info('Cache Middleware Error', ex);
-    next()
+    next();
   }
 };
 
 module.exports = {
-  cacheMiddleware
+  cacheMiddleware,
 };

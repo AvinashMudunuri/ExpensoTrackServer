@@ -3,7 +3,10 @@
 const request = require('supertest');
 const app = require('../../infrastructure/server'); // Assume your Express app is exported from app.js or server.js
 const { disconnectDB } = require('../../infrastructure/database');
-const { deleteRedisKey, disconnectRedis } = require('../../infrastructure/redis');
+const {
+  deleteRedisKey,
+  disconnectRedis,
+} = require('../../infrastructure/redis');
 const User = require('../../domain/user/models/user');
 
 const chai = require('chai');
@@ -18,7 +21,7 @@ describe(`User API's`, function () {
   before(async () => {
     const user = await User.findOne({ email: 'john@example.com' });
     if (user) {
-      await deleteRedisKey(`user::${user._id}`)
+      await deleteRedisKey(`user::${user._id}`);
     }
     await User.deleteMany({});
   });
