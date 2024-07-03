@@ -1,17 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const xss = require('xss-clean');
 
-const { connectDB } = require('./database');
+const config = require('../config/config');
+const { connectDB, connectTestDB } = require('./database');
 const { logger } = require('./logger');
 
-dotenv.config();
-
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = config.port || 8000;
 
 app.use(bodyParser.json());
 app.use(helmet());
@@ -22,9 +20,13 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
-
-connectDB().then(() => logger.info('Connection Success!!'));
-
+// app.use(auth);
+if (config.env === 'test') {
+  connectTestDB().then(() => logger.info('Test Connection Success!!'));
+} else {
+  connectDB().then(() => logger.info('Connection Success!!'));
+}
+// connectDB().then(() => logger.info('Connection Success!!'));
 const userRoutes = require('../routes/userRoutes');
 
 app.use('/api/users', userRoutes);
@@ -33,6 +35,11 @@ app.get('/', (req, res) => {
   res.send('ExpensoTracker API');
 });
 
-app.listen(PORT, () => {
-  logger.info(`Server is running on ${PORT}`);
-});
+if (require.main === module) {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    logger.info(`Server is running on ${PORT}`)
+  });
+}
+
+module.exports = app;

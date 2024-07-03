@@ -28,7 +28,7 @@ describe('User Service', function () {
 
   describe('Create User', () => {
     it('should create new user', async () => {
-      const userData = { name: 'John Doe', email: 'john@example.com' };
+      const userData = { name: 'John Doe', email: 'john@example.com', password: 'john123' };
       const user = await userService.createUser(userData);
       expect(user).to.have.property('_id');
       expect(user.name).to.equal('John Doe');
@@ -36,13 +36,39 @@ describe('User Service', function () {
     });
 
     it('should not create user with duplicate email', async () => {
-      const userData = { name: 'John Doe', email: 'john@example.com' };
+      const userData = { name: 'John Doe', email: 'john@example.com', password: 'john123' };
       try {
         await userService.createUser(userData);
       } catch (ex) {
         expect(ex.message).to.equal('User with this email already exists');
       }
     });
+  });
+
+  describe('Login User', () => {
+    it('Should throw error when invalid email is provided ', async () => {
+      const userData = { email: 'jon@example.com', password: 'john123' };
+      try {
+        await userService.login(userData.email, userData.password);
+      } catch (ex) {
+        expect(ex.message).to.equal('User with this id doesnot exists');
+      }
+    })
+
+    it('Should throw error when valid email and wrong password is provided ', async () => {
+      const userData = { email: 'john@example.com', password: 'john12' };
+      try {
+        await userService.login(userData.email, userData.password);
+      } catch (ex) {
+        expect(ex.message).to.equal('Invalid credentials');
+      }
+    })
+
+    it('Should login an existing user', async () => {
+      const userData = { email: 'john@example.com', password: 'john123' };
+      const token = await userService.login(userData.email, userData.password);
+      expect(token).to.be.a('string');
+    })
   });
 
   describe('getAllUsers', () => {

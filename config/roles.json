@@ -1,0 +1,30 @@
+{
+  "admin": {
+    "profile": {
+      "create:any": ["*"],
+      "read:any": ["*"],
+      "update:any": ["*"],
+      "delete:any": ["*"]
+    },
+    "expense": {
+      "create:any": ["*"],
+      "read:any": ["*"],
+      "update:any": ["*"],
+      "delete:any": ["*"]
+    }
+  },
+  "user": {
+    "profile": {
+      "create:own": ["*"],
+      "read:own": ["*"],
+      "update:own": ["*"],
+      "delete:own": ["*"]
+    },
+    "expense": {
+      "create:own": ["*"],
+      "read:own": ["*"],
+      "update:own": ["*"],
+      "delete:own": ["*"]
+    }
+  }
+}
