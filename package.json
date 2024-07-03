@@ -37,6 +37,7 @@
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.4",
+    "pm2": "^5.4.1",
     "redis": "^4.6.15",
     "xss-clean": "^0.1.4"
   },
@@ -50,7 +51,6 @@
     "husky": "^9.0.11",
     "mocha": "^10.5.2",
     "nodemon": "^3.1.4",
-    "pm2": "^5.4.1",
     "prettier": "^3.3.2",
     "supertest": "^7.0.0",
     "winston": "^3.13.0"
