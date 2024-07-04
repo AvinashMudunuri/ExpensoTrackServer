@@ -10,13 +10,13 @@ router.get('/redis', async (req, res) => {
       res.status(200).json({
         status: 'OK',
         message: 'Redis Connection is healthy',
-        ragStatus: 'GREEN'
+        ragStatus: 'GREEN',
       });
     } else {
       res.status(500).json({
         status: 'ERROR',
         message: 'Redis Connection is failed',
-        ragStatus: 'RED'
+        ragStatus: 'RED',
       });
     }
   } catch (error) {
@@ -36,13 +36,13 @@ router.get('/db', async (req, res) => {
       res.status(200).json({
         status: 'OK',
         message: 'MongoDB Connection is healthy',
-        ragStatus: 'GREEN'
+        ragStatus: 'GREEN',
       });
     } else {
       res.status(500).json({
         status: 'ERROR',
         message: 'MongoDB Connection is failed',
-        ragStatus: 'RED'
+        ragStatus: 'RED',
       });
     }
   } catch (error) {

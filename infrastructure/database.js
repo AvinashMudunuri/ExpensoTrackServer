@@ -38,7 +38,7 @@ const checkMongoDBConnection = async () => {
     logger.info('MongoDB Connection error', err);
     return false;
   }
-}
+};
 
 module.exports = {
   connectDB,
