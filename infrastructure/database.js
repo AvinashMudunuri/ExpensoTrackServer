@@ -30,8 +30,19 @@ const disconnectDB = async () => {
   }
 };
 
+const checkMongoDBConnection = async () => {
+  try {
+    await mongoose.connection.db.admin().ping();
+    return true;
+  } catch (err) {
+    logger.info('MongoDB Connection error', err);
+    return false;
+  }
+}
+
 module.exports = {
   connectDB,
   connectTestDB,
   disconnectDB,
+  checkMongoDBConnection,
 };
