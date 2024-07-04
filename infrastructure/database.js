@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const { logger } = require('./logger');
+const { serverLogger } = require('./logger');
 const config = require('../config/config');
 const connectDB = async () => {
   try {
     await mongoose.connect(config.mongoURI);
-    logger.info('Database Connected');
+    serverLogger.info('Database Connected');
   } catch (err) {
-    logger.error('Failed to connect', err);
+    serverLogger.error('Failed to connect', err);
     process.exit(1);
   }
 };
@@ -14,9 +14,9 @@ const connectDB = async () => {
 const connectTestDB = async () => {
   try {
     await mongoose.connect(config.mongoURITest);
-    logger.info('Test Database Connected');
+    serverLogger.info('Test Database Connected');
   } catch (err) {
-    logger.error('Failed to connect', err);
+    serverLogger.error('Failed to connect', err);
     process.exit(1);
   }
 };
@@ -24,9 +24,9 @@ const connectTestDB = async () => {
 const disconnectDB = async () => {
   try {
     await mongoose.disconnect();
-    logger.info('Database disconnected');
+    serverLogger.info('Database disconnected');
   } catch (err) {
-    logger.error('Failed to disconnect from MongoDB', err);
+    serverLogger.error('Failed to disconnect from MongoDB', err);
   }
 };
 
@@ -35,7 +35,7 @@ const checkMongoDBConnection = async () => {
     await mongoose.connection.db.admin().ping();
     return true;
   } catch (err) {
-    logger.info('MongoDB Connection error', err);
+    serverLogger.info('MongoDB Connection error', err);
     return false;
   }
 };

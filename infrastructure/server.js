@@ -3,17 +3,22 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const xss = require('xss-clean');
+const morgan = require('morgan');
 
 const config = require('../config/config');
 const { connectDB, connectTestDB } = require('./database');
-const { logger } = require('./logger');
+const { apiLogger, serverLogger } = require('./logger');
 
 const app = express();
 const PORT = config.port || 8000;
 
 // Trust Heroku's proxy
 app.set('trust proxy', 1);
-
+app.use(morgan('dev', {
+  stream: {
+    write: (message) => apiLogger.info(message.trim())
+  }
+}));
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(xss());
@@ -25,9 +30,9 @@ const limiter = rateLimit({
 app.use(limiter);
 
 if (config.env === 'test') {
-  connectTestDB().then(() => logger.info('Test Connection Success!!'));
+  connectTestDB().then(() => serverLogger.info('Test Connection Success!!'));
 } else {
-  connectDB().then(() => logger.info('Connection Success!!'));
+  connectDB().then(() => serverLogger.info('Connection Success!!'));
 }
 
 const userRoutes = require('../routes/userRoutes');
@@ -43,7 +48,7 @@ app.get('/', (req, res) => {
 if (require.main === module) {
   const port = process.env.PORT || 3000;
   app.listen(port, () => {
-    logger.info(`Server is running on ${PORT}`);
+    serverLogger.info(`Server is running on ${PORT}`);
   });
 }
 

@@ -1,6 +1,6 @@
 const redis = require('redis');
 const config = require('../config/config');
-const { logger } = require('./logger');
+const { serverLogger } = require('./logger');
 
 const redisClient = redis.createClient({
   password: config.redis.password,
@@ -10,16 +10,28 @@ const redisClient = redis.createClient({
   },
 });
 
+const setRedisKey = async (key, data) => {
+  await redisClient.set(key, JSON.stringify(data), 'EX', 3600); // Cache for 1 hour
+}
+
+const getRedisKey = async (key) => {
+  const data = await redisClient.get(key);
+  if (data) {
+    return JSON.parse(data);
+  }
+  return null;
+}
+
 const deleteRedisKey = async (key) => {
   try {
     const result = await redisClient.del(key);
     if (result === 1) {
-      logger.info(`Redis key ${key} deleted successfully`);
+      serverLogger.info(`Redis key ${key} deleted successfully`);
     } else {
-      logger.info(`Redis key ${key} not found`);
+      serverLogger.info(`Redis key ${key} not found`);
     }
   } catch (error) {
-    logger.error('Error deleting Redis key:', error);
+    serverLogger.error('Error deleting Redis key:', error);
   }
 };
 
@@ -28,34 +40,37 @@ const checkRedisConnection = async () => {
     await redisClient.ping();
     return true;
   } catch (err) {
-    logger.info('Redis Connection error', err);
+    serverLogger.info('Redis Connection error', err);
     return false;
   }
 };
 
 const disconnectRedis = async () => {
-  if (checkRedisConnection()) {
+  const isRedisConnected = await checkRedisConnection();
+  if (isRedisConnected) {
     try {
       await redisClient.quit();
-      logger.info('Redis client disconnected');
+      serverLogger.info('Redis client disconnected');
     } catch (error) {
-      logger.error('Error disconnecting Redis client:', error);
+      serverLogger.error('Error disconnecting Redis client:', error);
     }
   }
 };
 
 redisClient.on('error', (err) => {
-  logger.info('Redis Error', err);
+  serverLogger.info('Redis Error', err);
 });
 
 redisClient.on('connect', (err) => {
-  logger.info('Redis Connection Successfully', err);
+  serverLogger.info('Redis Connection Successfully', err);
 });
 
-redisClient.connect().catch((ex) => logger.info('Redis Error', ex));
+redisClient.connect().catch((ex) => serverLogger.info('Redis Error', ex));
 
 module.exports = {
   redisClient,
+  setRedisKey,
+  getRedisKey,
   checkRedisConnection,
   deleteRedisKey,
   disconnectRedis,
