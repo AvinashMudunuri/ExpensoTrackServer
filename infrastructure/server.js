@@ -14,11 +14,13 @@ const PORT = config.port || 8000;
 
 // Trust Heroku's proxy
 app.set('trust proxy', 1);
-app.use(morgan('dev', {
-  stream: {
-    write: (message) => apiLogger.info(message.trim())
-  }
-}));
+app.use(
+  morgan('dev', {
+    stream: {
+      write: (message) => apiLogger.info(message.trim()),
+    },
+  })
+);
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(xss());

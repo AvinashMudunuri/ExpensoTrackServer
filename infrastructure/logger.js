@@ -1,14 +1,14 @@
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, printf, splat } = format;
 const customFormat = printf(({ level, message, label, timestamp }) => {
-  return `${timestamp} [${label}] ${level}: ${message}`
-})
+  return `${timestamp} [${label}] ${level}: ${message}`;
+});
 
 const customLogger = (label) => {
   return createLogger({
     format: combine(
       format.label({ label }),
-      timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS'}),
+      timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
       customFormat,
       splat()
     ),
@@ -16,9 +16,9 @@ const customLogger = (label) => {
       new transports.Console(),
       new transports.File({ filename: 'error.log', level: 'error' }),
       new transports.File({ filename: 'combined.log' }),
-    ]
-  })
-}
+    ],
+  });
+};
 
 const serverLogger = customLogger('Express Server');
 const userModuleLogger = customLogger('User Module');

@@ -12,7 +12,7 @@ const redisClient = redis.createClient({
 
 const setRedisKey = async (key, data) => {
   await redisClient.set(key, JSON.stringify(data), 'EX', 3600); // Cache for 1 hour
-}
+};
 
 const getRedisKey = async (key) => {
   const data = await redisClient.get(key);
@@ -20,7 +20,7 @@ const getRedisKey = async (key) => {
     return JSON.parse(data);
   }
   return null;
-}
+};
 
 const deleteRedisKey = async (key) => {
   try {
