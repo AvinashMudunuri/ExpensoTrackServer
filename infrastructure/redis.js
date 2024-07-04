@@ -34,11 +34,13 @@ const checkRedisConnection = async () => {
 };
 
 const disconnectRedis = async () => {
-  try {
-    await redisClient.quit();
-    logger.info('Redis client disconnected');
-  } catch (error) {
-    logger.error('Error disconnecting Redis client:', error);
+  if (checkRedisConnection()) {
+    try {
+      await redisClient.quit();
+      logger.info('Redis client disconnected');
+    } catch (error) {
+      logger.error('Error disconnecting Redis client:', error);
+    }
   }
 };
 
