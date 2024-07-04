@@ -11,6 +11,9 @@ const { logger } = require('./logger');
 const app = express();
 const PORT = config.port || 8000;
 
+// Trust Heroku's proxy
+app.set('trust proxy', 1);
+
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(xss());
