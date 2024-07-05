@@ -36,10 +36,10 @@ switch (config.env) {
     connectTestDB().then(() => serverLogger.info('Test Connection Success!!'));
     break;
   case 'production':
-    connectProdDB().then(() => serverLogger.info('Test Connection Success!!'));
+    connectProdDB().then(() => serverLogger.info('Prod Connection Success!!'));
     break;
   default:
-    connectDB().then(() => serverLogger.info('Connection Success!!'));
+    connectDB().then(() => serverLogger.info('Dev Connection Success!!'));
 }
 
 const userRoutes = require('../routes/userRoutes');
