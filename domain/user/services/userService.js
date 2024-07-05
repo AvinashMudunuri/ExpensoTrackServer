@@ -1,5 +1,8 @@
 const userRepository = require('../repositories/userRepository');
-const { setRedisKey } = require('../../../infrastructure/redis');
+const {
+  setRedisKey,
+  deleteRedisKey,
+} = require('../../../infrastructure/redis');
 class UserService {
   async createUser(data) {
     const existingUser = await userRepository.findByEmail(data.email);
@@ -17,6 +20,27 @@ class UserService {
       const key = `user::${id}`;
       await setRedisKey(key, user);
       return user;
+    } else {
+      throw new Error('User with this id doesnot exists');
+    }
+  }
+  async updateUserById(id, data) {
+    const user = await userRepository.updateUserById(id, data);
+    if (user) {
+      const key = `user::${id}`;
+      await deleteRedisKey(key);
+      await setRedisKey(key, user);
+      return user;
+    } else {
+      throw new Error('User with this id doesnot exists');
+    }
+  }
+  async deleteUserById(id) {
+    const deletedUser = await userRepository.deleteUserById(id);
+    if (deletedUser) {
+      const key = `user::${id}`;
+      await deleteRedisKey(key);
+      return deletedUser;
     } else {
       throw new Error('User with this id doesnot exists');
     }

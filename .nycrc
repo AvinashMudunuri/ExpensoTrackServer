@@ -1,0 +1,10 @@
+{
+  "all": true,
+  "exclude": ["test/", "node_modules", "coverage/", "utils/generateToken.js"],
+  "reporter": ["lcov", "text"],
+  "check-coverage": true,
+  "branches": 80,
+  "lines": 80,
+  "functions": 80,
+  "statements": 80
+}

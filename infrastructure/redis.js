@@ -11,7 +11,16 @@ const redisClient = redis.createClient({
 });
 
 const setRedisKey = async (key, data) => {
-  await redisClient.set(key, JSON.stringify(data), 'EX', 3600); // Cache for 1 hour
+  try {
+    const result = await redisClient.set(key, JSON.stringify(data), 'EX', 3600);
+    if (result === 'OK') {
+      serverLogger.info(`Redis key ${key} added successfully`);
+    } else {
+      serverLogger.info(`Error adding Redis key ${key}`);
+    }
+  } catch (error) {
+    serverLogger.error('Error adding Redis key:', error);
+  }
 };
 
 const getRedisKey = async (key) => {

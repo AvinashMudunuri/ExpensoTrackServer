@@ -32,6 +32,9 @@ const disconnectDB = async () => {
 
 const checkMongoDBConnection = async () => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      throw new Error('MongoDB connection not ready');
+    }
     await mongoose.connection.db.admin().ping();
     return true;
   } catch (err) {

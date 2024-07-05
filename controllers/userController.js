@@ -44,6 +44,32 @@ class UserController {
       next();
     }
   }
+
+  async updateUserById(req, res, next) {
+    const id = req.params.id;
+    const updateData = req.body;
+    try {
+      const user = await userService.updateUserById(id, updateData);
+      res.status(200).json(user);
+    } catch (ex) {
+      res.status(500).send({ error: ex.message });
+      next();
+    }
+  }
+
+  async deleteUserById(req, res, next) {
+    try {
+      const response = await userService.deleteUserById(req.params.id);
+      if (response) {
+        res.status(200).json({ message: 'User deleted successfully' });
+      } else {
+        res.status(500).send({ error: 'User with this id doesnot exists' });
+      }
+    } catch (ex) {
+      res.status(500).send({ error: ex.message });
+      next();
+    }
+  }
 }
 
 module.exports = new UserController();
