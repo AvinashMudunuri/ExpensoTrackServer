@@ -31,7 +31,7 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-switch(config.env) {
+switch (config.env) {
   case 'test':
     connectTestDB().then(() => serverLogger.info('Test Connection Success!!'));
     break;
@@ -39,7 +39,7 @@ switch(config.env) {
     connectProdDB().then(() => serverLogger.info('Test Connection Success!!'));
     break;
   default:
-    connectDB().then(() => serverLogger.info('Connection Success!!'));   
+    connectDB().then(() => serverLogger.info('Connection Success!!'));
 }
 
 const userRoutes = require('../routes/userRoutes');
