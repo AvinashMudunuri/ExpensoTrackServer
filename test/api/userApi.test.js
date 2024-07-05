@@ -71,6 +71,25 @@ describe(`User API's`, function () {
       });
   });
 
+  it('GET /api/users', (done) => {
+    request(app)
+      .get(`/api/users`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body).to.be.an('array');
+        expect(res.body.length).to.be.greaterThan(0);
+        expect(res.body[0]).to.have.property('_id');
+        expect(res.body[0]).to.have.property('name');
+        expect(res.body[0]).to.have.property('email');
+        expect(res.body[0]).to.have.property('password');
+        expect(res.body[0]).to.have.property('role');
+        expect(res.body[0]).to.have.property('created_at');
+        done();
+      });
+  });
+
   it('GET /api/users/:id', (done) => {
     request(app)
       .get(`/api/users/${userId}`)
@@ -88,21 +107,36 @@ describe(`User API's`, function () {
       });
   });
 
-  it('GET /api/users', (done) => {
+  it('PUT /api/users/:id', (done) => {
     request(app)
-      .get(`/api/users`)
+      .put(`/api/users/${userId}`)
+      .send({
+        name: 'John woo',
+      })
       .set('Authorization', `Bearer ${token}`)
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
-        expect(res.body).to.be.an('array');
-        expect(res.body.length).to.be.greaterThan(0);
-        expect(res.body[0]).to.have.property('_id');
-        expect(res.body[0]).to.have.property('name');
-        expect(res.body[0]).to.have.property('email');
-        expect(res.body[0]).to.have.property('password');
-        expect(res.body[0]).to.have.property('role');
-        expect(res.body[0]).to.have.property('created_at');
+        expect(res.body.name).to.equal('John woo');
+        expect(res.body).to.have.property('_id');
+        expect(res.body).to.have.property('name');
+        expect(res.body).to.have.property('email');
+        expect(res.body).to.have.property('password');
+        expect(res.body).to.have.property('role');
+        expect(res.body).to.have.property('created_at');
+        done();
+      });
+  });
+
+  it('DEL /api/users/:id', (done) => {
+    request(app)
+      .delete(`/api/users/${userId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body).to.have.property('message');
+        expect(res.body.message).to.equal('User deleted successfully');
         done();
       });
   });

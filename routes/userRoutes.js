@@ -30,4 +30,30 @@ router.get(
   }
 );
 
+router.put(
+  '/:id',
+  auth,
+  grantAccess('updateOwn', 'profile'),
+  async (req, res, next) => {
+    try {
+      await userController.updateUserById(req, res, next);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.delete(
+  '/:id',
+  auth,
+  grantAccess('deleteOwn', 'profile'),
+  async (req, res, next) => {
+    try {
+      await userController.deleteUserById(req, res, next);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 module.exports = router;

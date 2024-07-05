@@ -18,6 +18,7 @@ chai.use(chaiHttp);
 
 // Set a longer timeout for all tests
 const TEST_TIMEOUT = 10000;
+let userId;
 
 describe('User Service', function () {
   this.timeout(TEST_TIMEOUT);
@@ -47,6 +48,7 @@ describe('User Service', function () {
       expect(user).to.have.property('_id');
       expect(user.name).to.equal('John Doe');
       expect(user.email).to.equal('john@example.com');
+      userId = user._id;
     });
 
     it('should not create user with duplicate email', async () => {
@@ -94,6 +96,54 @@ describe('User Service', function () {
       const users = await userService.getAllUsers();
       expect(users).to.be.an('array');
       expect(users.length).to.be.greaterThan(0);
+    });
+  });
+
+  describe('getUserById', () => {
+    it('Should return user', async () => {
+      const user = await userService.getUserById(userId);
+      expect(user).to.have.property('_id');
+      expect(user.name).to.equal('John Doe');
+      expect(user.email).to.equal('john@example.com');
+    });
+    it('Should throw error with invalid id', async () => {
+      try {
+        await userService.getUserById('66851c96bee514225ee6ca86');
+      } catch (ex) {
+        expect(ex.message).to.equal('User with this id doesnot exists');
+      }
+    });
+  });
+
+  describe('updateUserById', () => {
+    const data = {
+      name: 'John Woo',
+    };
+    it('Should return user with new data', async () => {
+      const user = await userService.updateUserById(userId, data);
+      expect(user).to.have.property('_id');
+      expect(user.name).to.equal('John Woo');
+    });
+    it('Should throw error with invalid id', async () => {
+      try {
+        await userService.getUserById('66851c96bee514225ee6ca86', data);
+      } catch (ex) {
+        expect(ex.message).to.equal('User with this id doesnot exists');
+      }
+    });
+  });
+
+  describe('deleteUserById', () => {
+    it('Should delete user', async () => {
+      const result = await userService.deleteUserById(userId);
+      expect(result).to.have.property('_id');
+    });
+    it('Should throw error with invalid id', async () => {
+      try {
+        await userService.deleteUserById('66851c96bee514225ee6ca86');
+      } catch (ex) {
+        expect(ex.message).to.equal('User with this id doesnot exists');
+      }
     });
   });
 });
