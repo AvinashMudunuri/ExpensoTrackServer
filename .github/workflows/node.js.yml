@@ -3,6 +3,17 @@
 
 name: Node.js CI
 
+env:
+  PORT=3000
+  NODE_ENV=test
+  JWT_SECRET="expensotrack"
+  MONGODB_URI_PROD='mongodb+srv://amudunuri:RXVXMAGfvg4L1yXU@expensecluster.dyqqo0p.mongodb.net/ExpensoTrack'
+  MONGODB_URI_DEV='mongodb+srv://amudunuri:RXVXMAGfvg4L1yXU@expensecluster.dyqqo0p.mongodb.net/ExpensoTrack_dev'
+  MONGODB_URI_TEST='mongodb+srv://amudunuri:RXVXMAGfvg4L1yXU@expensecluster.dyqqo0p.mongodb.net/ExpensoTrack_test'
+  REDIS_HOST='redis-18961.c264.ap-south-1-1.ec2.redns.redis-cloud.com'
+  REDIS_PORT=18961
+  REDIS_PASSWORD='wh6RsqGLH1FAagEW2Ny66jwnHuDHHKMI'
+
 on:
   push:
     branches: [ "main" ]
