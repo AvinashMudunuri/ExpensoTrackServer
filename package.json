@@ -4,7 +4,7 @@
   "description": "Personal Expense Tracker Server",
   "main": "infrastructure/server.js",
   "scripts": {
-    "start": "nodemon --watch infrastructure --watch infrastructure/server.js",
+    "start": "cross-env NODE_ENV=development nodemon --watch infrastructure --watch infrastructure/server.js",
     "start:prod": "pm2 start infrastructure/server.js --name ExpensoTrack --env production --no-daemon",
     "stop:prod": "pm2 stop ExpensoTrack",
     "format:check": "prettier --check .",

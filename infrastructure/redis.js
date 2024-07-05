@@ -12,11 +12,12 @@ const redisClient = redis.createClient({
 
 const setRedisKey = async (key, data) => {
   try {
-    const result = await redisClient.set(key, JSON.stringify(data), 'EX', 3600);
+    const envKey = `${config.env}_${key}`;
+    const result = await redisClient.set(envKey, JSON.stringify(data), 'EX', 3600);
     if (result === 'OK') {
-      serverLogger.info(`Redis key ${key} added successfully`);
+      serverLogger.info(`Redis key ${envKey} added successfully`);
     } else {
-      serverLogger.info(`Error adding Redis key ${key}`);
+      serverLogger.info(`Error adding Redis key ${envKey}`);
     }
   } catch (error) {
     serverLogger.error('Error adding Redis key:', error);
@@ -24,7 +25,8 @@ const setRedisKey = async (key, data) => {
 };
 
 const getRedisKey = async (key) => {
-  const data = await redisClient.get(key);
+  const envKey = `${config.env}_${key}`;
+  const data = await redisClient.get(envKey);
   if (data) {
     return JSON.parse(data);
   }
@@ -32,12 +34,13 @@ const getRedisKey = async (key) => {
 };
 
 const deleteRedisKey = async (key) => {
+  const envKey = `${config.env}_${key}`;
   try {
-    const result = await redisClient.del(key);
+    const result = await redisClient.del(envKey);
     if (result === 1) {
-      serverLogger.info(`Redis key ${key} deleted successfully`);
+      serverLogger.info(`Redis key ${envKey} deleted successfully`);
     } else {
-      serverLogger.info(`Redis key ${key} not found`);
+      serverLogger.info(`Redis key ${envKey} not found`);
     }
   } catch (error) {
     serverLogger.error('Error deleting Redis key:', error);
