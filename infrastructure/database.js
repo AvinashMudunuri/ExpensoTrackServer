@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { serverLogger } = require('./logger');
 const config = require('../config/config');
+
 const connectDB = async () => {
   try {
     await mongoose.connect(config.mongoURI);
@@ -15,6 +16,16 @@ const connectTestDB = async () => {
   try {
     await mongoose.connect(config.mongoURITest);
     serverLogger.info('Test Database Connected');
+  } catch (err) {
+    serverLogger.error('Failed to connect', err);
+    process.exit(1);
+  }
+};
+
+const connectProdDB = async () => {
+  try {
+    await mongoose.connect(config.mongoURIProd);
+    serverLogger.info('Prod Database Connected');
   } catch (err) {
     serverLogger.error('Failed to connect', err);
     process.exit(1);
@@ -46,6 +57,7 @@ const checkMongoDBConnection = async () => {
 module.exports = {
   connectDB,
   connectTestDB,
+  connectProdDB,
   disconnectDB,
   checkMongoDBConnection,
 };

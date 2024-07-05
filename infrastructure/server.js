@@ -6,7 +6,7 @@ const xss = require('xss-clean');
 const morgan = require('morgan');
 
 const config = require('../config/config');
-const { connectDB, connectTestDB } = require('./database');
+const { connectDB, connectTestDB, connectProdDB } = require('./database');
 const { apiLogger, serverLogger } = require('./logger');
 
 const app = express();
@@ -31,10 +31,15 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-if (config.env === 'test') {
-  connectTestDB().then(() => serverLogger.info('Test Connection Success!!'));
-} else {
-  connectDB().then(() => serverLogger.info('Connection Success!!'));
+switch(config.env) {
+  case 'test':
+    connectTestDB().then(() => serverLogger.info('Test Connection Success!!'));
+    break;
+  case 'production':
+    connectProdDB().then(() => serverLogger.info('Test Connection Success!!'));
+    break;
+  default:
+    connectDB().then(() => serverLogger.info('Connection Success!!'));   
 }
 
 const userRoutes = require('../routes/userRoutes');
