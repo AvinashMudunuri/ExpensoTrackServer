@@ -26,7 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Set up environment variables
     - run: echo "MONGODB_URI_TEST=${{ secrets.MONGODB_URI_TEST }}" >> $GITHUB_ENV
     - run: echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> $GITHUB_ENV
     - run: echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> $GITHUB_ENV
