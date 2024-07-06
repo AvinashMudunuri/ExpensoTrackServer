@@ -3,17 +3,6 @@
 
 name: Node.js CI
 
-env:
-  PORT=3000
-  NODE_ENV=test
-  JWT_SECRET="expensotrack"
-  MONGODB_URI_PROD='mongodb+srv://amudunuri:RXVXMAGfvg4L1yXU@expensecluster.dyqqo0p.mongodb.net/ExpensoTrack'
-  MONGODB_URI_DEV='mongodb+srv://amudunuri:RXVXMAGfvg4L1yXU@expensecluster.dyqqo0p.mongodb.net/ExpensoTrack_dev'
-  MONGODB_URI_TEST='mongodb+srv://amudunuri:RXVXMAGfvg4L1yXU@expensecluster.dyqqo0p.mongodb.net/ExpensoTrack_test'
-  REDIS_HOST='redis-18961.c264.ap-south-1-1.ec2.redns.redis-cloud.com'
-  REDIS_PORT=18961
-  REDIS_PASSWORD='wh6RsqGLH1FAagEW2Ny66jwnHuDHHKMI'
-
 on:
   push:
     branches: [ "main" ]
@@ -37,6 +26,15 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: Set up environment variables
+    - run: echo "MONGODB_URI_TEST=${{ secrets.MONGODB_URI_TEST }}" >> $GITHUB_ENV
+    - run: echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> $GITHUB_ENV
+    - run: echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> $GITHUB_ENV
+    - run: echo "REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}" >> $GITHUB_ENV
+    - run: echo "PORT=${{ secrets.PORT }}" >> $GITHUB_ENV
+    - run: echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> $GITHUB_ENV
+    - run: echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> $GITHUB_ENV
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+    
