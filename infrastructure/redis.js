@@ -13,7 +13,12 @@ const redisClient = redis.createClient({
 const setRedisKey = async (key, data) => {
   try {
     const envKey = `${config.env}_${key}`;
-    const result = await redisClient.set(envKey, JSON.stringify(data), 'EX', 3600);
+    const result = await redisClient.set(
+      envKey,
+      JSON.stringify(data),
+      'EX',
+      3600
+    );
     if (result === 'OK') {
       serverLogger.info(`Redis key ${envKey} added successfully`);
     } else {
