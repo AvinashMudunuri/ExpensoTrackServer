@@ -1,15 +1,34 @@
-const userService = require('../domain/user/services/userService');
+const userService = require('../domain/services/userService');
+const sessionService = require('../domain/services/sessionService');
 class UserController {
   async login(req, res) {
     try {
       const { email, password } = req.body;
-      const token = await userService.login(email, password);
+      const user = await userService.login(email, password);
+      await sessionService.createSession({
+        userId: user.id,
+        token: user.token,
+      });
       res.status(200).json({
-        token,
+        token: user.token,
       });
     } catch (ex) {
       res.status(400).json({
         error: ex.message,
+      });
+    }
+  }
+
+  async logout(req, res) {
+    try {
+      const token = req.header('Authorization').replace('Bearer ', '');
+      await sessionService.deleteSession(token);
+      res.status(200).json({
+        message: 'Logout Successful',
+      });
+    } catch (e) {
+      res.status(500).json({
+        error: 'Could not logout, please try again',
       });
     }
   }

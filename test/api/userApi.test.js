@@ -7,7 +7,7 @@ const {
   deleteRedisKey,
   disconnectRedis,
 } = require('../../infrastructure/redis');
-const User = require('../../domain/user/models/user');
+const User = require('../../domain/models/user');
 
 const chai = require('chai');
 const expect = chai.expect;

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const config = require('../../../config/config');
+const config = require('../../config/config');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -28,6 +28,7 @@ userSchema.methods.generateToken = async function () {
     {
       id: this.id,
       role: this.role,
+      name: this.name
     },
     config.jwtSecret,
     { expiresIn: '1h' }
