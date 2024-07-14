@@ -10,8 +10,8 @@ const {
   disconnectRedis,
 } = require('../../../infrastructure/redis');
 
-const User = require('../../../domain/user/models/user');
-const userService = require('../../../domain/user/services/userService');
+const User = require('../../../domain/models/user');
+const userService = require('../../../domain/services/userService');
 
 const expect = chai.expect;
 chai.use(chaiHttp);
@@ -86,8 +86,8 @@ describe('User Service', function () {
 
     it('Should login an existing user', async () => {
       const userData = { email: 'john@example.com', password: 'john123' };
-      const token = await userService.login(userData.email, userData.password);
-      expect(token).to.be.a('string');
+      const user = await userService.login(userData.email, userData.password);
+      expect(user.token).to.be.a('string');
     });
   });
 

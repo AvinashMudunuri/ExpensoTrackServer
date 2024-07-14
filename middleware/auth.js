@@ -16,7 +16,7 @@ const auth = (req, res, next) => {
 
   try {
     // Verify token
-    jwt.verify(actualToken, config.jwtSecret, (err, decoded) => {
+    jwt.verify(actualToken, config.jwtSecret, async (err, decoded) => {
       if (err) {
         return res.status(401).json({ msg: err });
       }
