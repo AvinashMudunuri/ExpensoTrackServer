@@ -12,7 +12,9 @@ router.post('/auth/register', async (req, res) =>
 
 router.post('/auth/login', async (req, res) => userController.login(req, res));
 
-router.post('/auth/logout', async (req, res) => userController.logout(req, res));
+router.post('/auth/logout', async (req, res) =>
+  userController.logout(req, res)
+);
 
 router.get('/', auth, grantAccess('readOwn', 'profile'), async (req, res) =>
   userController.getAllUsers(req, res)

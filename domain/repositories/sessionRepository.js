@@ -11,6 +11,6 @@ class SessionRepository {
   async findByToken(token) {
     return await Session.findOne({ token });
   }
-};
+}
 
 module.exports = new SessionRepository();

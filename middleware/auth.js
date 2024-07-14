@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
-const sessionService = require('../domain/services/sessionService');
 
 const auth = (req, res, next) => {
   // Get token from header
@@ -8,7 +7,7 @@ const auth = (req, res, next) => {
 
   // Check if token is not present
   if (!token)
-    return res.status(401).json({ msg: 'No token, authorization denied' }); 
+    return res.status(401).json({ msg: 'No token, authorization denied' });
 
   // Remove 'Bearer' from the token if present
   const actualToken = token.startsWith('Bearer ')

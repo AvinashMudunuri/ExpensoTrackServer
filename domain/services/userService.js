@@ -1,8 +1,5 @@
 const userRepository = require('../repositories/userRepository');
-const {
-  setRedisKey,
-  deleteRedisKey,
-} = require('../../infrastructure/redis');
+const { setRedisKey, deleteRedisKey } = require('../../infrastructure/redis');
 class UserService {
   async createUser(data) {
     const existingUser = await userRepository.findByEmail(data.email);
@@ -55,8 +52,8 @@ class UserService {
       throw new Error('Invalid credentials');
     }
     return {
-      id: user._id, 
-      token: await user.generateToken()
+      id: user._id,
+      token: await user.generateToken(),
     };
   }
 }

@@ -28,7 +28,7 @@ userSchema.methods.generateToken = async function () {
     {
       id: this.id,
       role: this.role,
-      name: this.name
+      name: this.name,
     },
     config.jwtSecret,
     { expiresIn: '1h' }
