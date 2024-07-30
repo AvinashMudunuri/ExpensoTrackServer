@@ -3,15 +3,15 @@ const chaiHttp = require('chai-http');
 const {
   connectTestDB,
   disconnectDB,
-} = require('../../../infrastructure/database');
+} = require('../../infrastructure/database');
 
 const {
   deleteRedisKey,
   disconnectRedis,
-} = require('../../../infrastructure/redis');
+} = require('../../infrastructure/redis');
 
-const User = require('../../../domain/models/user');
-const userService = require('../../../domain/services/userService');
+const User = require('../../domain/models/user');
+const userService = require('../../domain/services/userService');
 
 const expect = chai.expect;
 chai.use(chaiHttp);
