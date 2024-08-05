@@ -45,10 +45,15 @@ switch (config.env) {
 const userRoutes = require('../routes/userRoutes');
 const healthRoutes = require('../routes/healthCheckRoutes');
 const paymentModeRoutes = require('../routes/paymentModeRoutes');
+const accountRoutes = require('../routes/accountRoutes');
+const transactionRoutes = require('../routes/transactionRoutes');
 
 app.use('/api/users', userRoutes);
 app.use('/health', healthRoutes);
 app.use('/api/paymentmode', paymentModeRoutes);
+app.use('/api/account', accountRoutes);
+app.use('/api/transaction', transactionRoutes);
+
 
 app.get('/', (req, res) => {
   res.send('ExpensoTracker API');

@@ -2,11 +2,9 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const grantAccess = require('../middleware/grantAccess');
+const { cacheMiddleware } = require('../middleware/cache');
 
-const accountController = require('../controllers/accountController');
+const investmentController = require('../controllers/investmentController');
 
-router.post('/', auth, grantAccess('createOwn', 'expense'), async (req, res) =>
-  accountController.createAccount(req, res)
-);
 
 module.exports = router;
