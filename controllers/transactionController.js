@@ -12,6 +12,17 @@ class TransactionController {
       res.status(400).send({ error: ex.message });
     }
   }
+  async getTransactions(req, res) {
+    try {
+      const transactions = await transactionService.getTransactions(req.query);
+      res.status(201).json({        
+        data: transactions,
+      });
+
+    } catch (ex) {
+      res.status(400).send({ error: ex.message });
+    }
+  }
 }
 
 module.exports = new TransactionController();

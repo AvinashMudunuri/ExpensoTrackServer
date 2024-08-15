@@ -4,24 +4,24 @@ const auth = require('../middleware/auth');
 const grantAccess = require('../middleware/grantAccess');
 const { cacheMiddleware } = require('../middleware/cache');
 
-const accountController = require('../controllers/accountController');
+const transactionTypeController = require('../controllers/transactionTypeController');
 
 router.post('/', auth, grantAccess('createOwn', 'expense'), async (req, res) =>
-  accountController.createAccount(req, res)
+  transactionTypeController.createTransactionType(req, res)
 );
 
 router.get('/', auth, grantAccess('readOwn', 'expense'), async (req, res) =>
-  accountController.getAllAccounts(req, res)
+  transactionTypeController.getAllTransactionTypes(req, res)
 );
 
 router.get(
   '/:id',
   auth,
   grantAccess('readOwn', 'expense'),
-  cacheMiddleware('ACCOUNT'),
+  cacheMiddleware('TC'),
   async (req, res, next) => {
     try {
-      await accountController.getAccountById(req, res, next);
+      await transactionTypeController.getTransactionTypeById(req, res, next);
     } catch (err) {
       next(err);
     }
@@ -34,7 +34,7 @@ router.put(
   grantAccess('updateOwn', 'expense'),
   async (req, res, next) => {
     try {
-      await accountController.updateAccountById(req, res, next);
+      await transactionTypeController.updateTransactionTypeById(req, res, next);
     } catch (err) {
       next(err);
     }
@@ -47,7 +47,7 @@ router.delete(
   grantAccess('deleteOwn', 'expense'),
   async (req, res, next) => {
     try {
-      await accountController.deleteAccountById(req, res, next);
+      await transactionTypeController.deleteTransactionTypeById(req, res, next);
     } catch (err) {
       next(err);
     }

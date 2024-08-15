@@ -13,15 +13,15 @@ const transactionSchema = new Schema({
     required: true,
   },
   amount: { type: Number, required: true },
-  transactionCategory: {
-    type: String,
-    enum: ['Food', 'Mediciens', 'Groceries'],
+  categoryId: {
+    type: Schema.Types.ObjectId,
+    ref: 'TransactionCategory',
     requires: true,
   },
-  transactionType: {
-    type: String,
-    enum: ['Credit', 'Debit'],
-    required: true,
+  transactionTypeId: {
+    type: Schema.Types.ObjectId,
+    ref: 'TransactionType',
+    requires: true,
   },
   paymentModeId: {
     type: Schema.Types.ObjectId,

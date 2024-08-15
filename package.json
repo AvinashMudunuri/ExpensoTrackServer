@@ -14,7 +14,10 @@
     "test": "cross-env NODE_ENV=test PORT=3001 mocha --recursive",
     "test:coverage": "cross-env NODE_ENV=test PORT=3001 nyc mocha --recursive",
     "prepare": "husky",
-    "generateModel": "node ./utils/generateDomainModel.js"
+    "generateModel": "node ./utils/generateDomainModel.js",
+    "seed-dev-data": "cross-env NODE_ENV=development node ./utils/seed.js",
+    "seed-test-data": "cross-env NODE_ENV=test node ./utils/seed.js",
+    "seed-prod-data": "cross-env NODE_ENV=production node ./utils/seed.js"
   },
   "repository": {
     "type": "git",
