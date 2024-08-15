@@ -58,7 +58,6 @@ app.use('/api/transaction', transactionRoutes);
 app.use('/api/transactionCategory', transactionCategoryRoutes);
 app.use('/api/transactionType', transactionTypes);
 
-
 app.get('/', (req, res) => {
   res.send('ExpensoTracker API');
 });

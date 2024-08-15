@@ -9,5 +9,4 @@ router.post('/', auth, grantAccess('createOwn', 'expense'), async (req, res) =>
   transactionController.createTransaction(req, res)
 );
 
-
 module.exports = router;

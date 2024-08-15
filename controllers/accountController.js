@@ -35,10 +35,7 @@ class AccountController {
     const id = req.params.id;
     const updateData = req.body;
     try {
-      const user = await accountService.updateAccountById(
-        id,
-        updateData
-      );
+      const user = await accountService.updateAccountById(id, updateData);
       res.status(200).json(user);
     } catch (ex) {
       res.status(500).send({ error: ex.message });

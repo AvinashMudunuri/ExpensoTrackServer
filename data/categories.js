@@ -10,11 +10,20 @@ const basicCategories = [
   { name: 'Rent/Mortgage', description: 'Expenses for rent or mortgage' },
   { name: 'Property Taxes', description: 'Expenses for property taxes' },
   { name: 'Home Insurance', description: 'Expenses for home insurance' },
-  { name: 'Utilities', description: 'Expenses for utilities like electricity, water, gas' },
-  { name: 'Maintenance/Repairs', description: 'Expenses for home maintenance and repairs' },
+  {
+    name: 'Utilities',
+    description: 'Expenses for utilities like electricity, water, gas',
+  },
+  {
+    name: 'Maintenance/Repairs',
+    description: 'Expenses for home maintenance and repairs',
+  },
   { name: 'Fuel', description: 'Expenses for fuel' },
   { name: 'Public Transit', description: 'Expenses for public transportation' },
-  { name: 'Vehicle Maintenance', description: 'Expenses for vehicle maintenance' },
+  {
+    name: 'Vehicle Maintenance',
+    description: 'Expenses for vehicle maintenance',
+  },
   { name: 'Insurance', description: 'Expenses for vehicle insurance' },
   { name: 'Parking', description: 'Expenses for parking' },
   { name: 'Leasing', description: 'Expenses for leasing a vehicle' },
@@ -30,8 +39,14 @@ const basicCategories = [
   { name: 'Eyecare', description: 'Expenses for eye care' },
   { name: 'Life Insurance', description: 'Expenses for life insurance' },
   { name: 'Auto Insurance', description: 'Expenses for auto insurance' },
-  { name: 'Home/Renters Insurance', description: 'Expenses for home or renters insurance' },
-  { name: 'Credit Card Payments', description: 'Expenses for credit card payments' },
+  {
+    name: 'Home/Renters Insurance',
+    description: 'Expenses for home or renters insurance',
+  },
+  {
+    name: 'Credit Card Payments',
+    description: 'Expenses for credit card payments',
+  },
   { name: 'Loan Payments', description: 'Expenses for loan payments' },
   { name: 'Mortgage Payments', description: 'Expenses for mortgage payments' },
   { name: 'Emergency Fund', description: 'Savings for emergencies' },
@@ -41,7 +56,10 @@ const basicCategories = [
   { name: 'Savings Account', description: 'Savings in a bank account' },
   { name: 'Movies', description: 'Expenses for movies' },
   { name: 'Concerts', description: 'Expenses for concerts' },
-  { name: 'Subscriptions', description: 'Expenses for subscriptions like Netflix, Spotify' },
+  {
+    name: 'Subscriptions',
+    description: 'Expenses for subscriptions like Netflix, Spotify',
+  },
   { name: 'Hobbies', description: 'Expenses for hobbies' },
   { name: 'Books', description: 'Expenses for books' },
   { name: 'Sports', description: 'Expenses for sports' },
@@ -50,14 +68,23 @@ const basicCategories = [
   { name: 'Gym Membership', description: 'Expenses for gym membership' },
   { name: 'Cosmetics', description: 'Expenses for cosmetics' },
   { name: 'Tuition', description: 'Expenses for tuition' },
-  { name: 'Books and Supplies', description: 'Expenses for books and supplies' },
+  {
+    name: 'Books and Supplies',
+    description: 'Expenses for books and supplies',
+  },
   { name: 'Courses/Classes', description: 'Expenses for courses and classes' },
   { name: 'Daycare', description: 'Expenses for daycare' },
   { name: 'School Supplies', description: 'Expenses for school supplies' },
   { name: 'Activities', description: 'Expenses for children activities' },
   { name: 'Clothing', description: 'Expenses for clothing' },
-  { name: 'Charitable Donations', description: 'Expenses for charitable donations' },
-  { name: 'Gifts for Family/Friends', description: 'Expenses for gifts for family and friends' },
+  {
+    name: 'Charitable Donations',
+    description: 'Expenses for charitable donations',
+  },
+  {
+    name: 'Gifts for Family/Friends',
+    description: 'Expenses for gifts for family and friends',
+  },
   { name: 'Travel', description: 'Expenses for travel' },
   { name: 'Pet Care', description: 'Expenses for pet care' },
   { name: 'Taxes', description: 'Expenses for taxes' },
@@ -68,8 +95,8 @@ const categories = basicCategories.map((c) => {
   return {
     ...c,
     label: c.name,
-    value: c.name
-  }
-})
+    value: c.name,
+  };
+});
 
 module.exports = categories;

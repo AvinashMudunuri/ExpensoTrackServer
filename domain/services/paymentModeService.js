@@ -3,7 +3,9 @@ const { setRedisKey, deleteRedisKey } = require('../../infrastructure/redis');
 
 class PaymentModeService {
   async createPaymentMode(data) {
-    const existingMode = await paymentModeRepository.getPaymentModeByName(data.mode_name);
+    const existingMode = await paymentModeRepository.getPaymentModeByName(
+      data.mode_name
+    );
     if (existingMode) {
       throw new Error('Payment Mode with this already exists');
     }
@@ -45,4 +47,4 @@ class PaymentModeService {
   }
 }
 
-module.exports  = new PaymentModeService();
+module.exports = new PaymentModeService();

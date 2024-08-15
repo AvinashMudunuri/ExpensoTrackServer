@@ -2,7 +2,9 @@ const accountRepository = require('../repositories/accountRepository');
 const { setRedisKey, deleteRedisKey } = require('../../infrastructure/redis');
 class AccountService {
   async createAccount(data) {
-    const existingName = await accountRepository.getAccountByName(data.accountName);
+    const existingName = await accountRepository.getAccountByName(
+      data.accountName
+    );
     if (existingName) {
       throw new Error('Account name with this already exists');
     }

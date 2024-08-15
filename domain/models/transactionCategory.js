@@ -14,4 +14,7 @@ transactionCategorySchema.pre('save', async function (next) {
   next();
 });
 
-module.exports = mongoose.model('TransactionCategory', transactionCategorySchema);
+module.exports = mongoose.model(
+  'TransactionCategory',
+  transactionCategorySchema
+);

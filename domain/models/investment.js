@@ -13,7 +13,11 @@ const investmentSchema = new Schema({
     enum: ['RD', 'FD', 'Mutual Funds', 'Gold'],
     required: true,
   },
-  frequency: { type: String, required: true, enum: ['Monthly', 'Quartely', 'Half-Yearly', 'Yearly']},
+  frequency: {
+    type: String,
+    required: true,
+    enum: ['Monthly', 'Quartely', 'Half-Yearly', 'Yearly'],
+  },
   amount: { type: Number, required: true },
   date: { type: Date, required: true, default: Date.now },
 });

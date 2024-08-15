@@ -6,13 +6,16 @@ class TransactionRepository {
   }
   async getTransactions(query) {
     const { page = 1, limit = 10 } = query;
-    const transactions = await Transaction.find().skip((page - 1) * limit).limit(parseInt(limit)).exec();
+    const transactions = await Transaction.find()
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit))
+      .exec();
     const count = await Transaction.countDocuments();
     const response = {
       transactions,
       totalPages: Math.ceil(count / limit),
-      currentPage: page
-    }
+      currentPage: page,
+    };
     return response;
   }
 }

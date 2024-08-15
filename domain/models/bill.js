@@ -10,7 +10,7 @@ const billSchema = new Schema({
   billName: { type: String, required: true },
   amount: { type: Number, required: true },
   dueDate: { type: Date, required: true },
-  isPaid: { type: Boolean, default: false, required: true }
+  isPaid: { type: Boolean, default: false, required: true },
 });
 
 module.exports = mongoose.model('bill', billSchema);

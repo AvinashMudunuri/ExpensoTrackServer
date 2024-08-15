@@ -24,7 +24,9 @@ class TransactionTypeController {
 
   async getTransactionTypeById(req, res, next) {
     try {
-      const tc = await transactionTypeService.getTransactionTypeById(req.params.id);
+      const tc = await transactionTypeService.getTransactionTypeById(
+        req.params.id
+      );
       res.status(200).json(tc);
     } catch (ex) {
       res.status(500).send({ error: ex.message });
@@ -49,7 +51,9 @@ class TransactionTypeController {
 
   async deleteTransactionTypeById(req, res, next) {
     try {
-      const pm = await transactionTypeService.deleteTransactionTypeById(req.params.id);
+      const pm = await transactionTypeService.deleteTransactionTypeById(
+        req.params.id
+      );
       res.status(200).json(pm);
     } catch (ex) {
       res.status(500).send({ error: ex.message });

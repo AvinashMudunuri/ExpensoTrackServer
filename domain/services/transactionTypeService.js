@@ -4,9 +4,7 @@ const { setRedisKey, deleteRedisKey } = require('../../infrastructure/redis');
 class TransactionTypeService {
   async createTransactionType(data) {
     const existingCategory =
-      await transactionTypeRepository.getTransactionTypeByName(
-        data.mode_name
-      );
+      await transactionTypeRepository.getTransactionTypeByName(data.mode_name);
     if (existingCategory) {
       throw new Error('Transaction Category with this already exists');
     }
@@ -16,8 +14,7 @@ class TransactionTypeService {
     return await transactionTypeRepository.getAllTransactionTypes();
   }
   async getTransactionTypeById(id) {
-    const tt =
-      await transactionTypeRepository.getTransactionTypeById(id);
+    const tt = await transactionTypeRepository.getTransactionTypeById(id);
     if (tt) {
       const key = `TT::${id}`;
       await setRedisKey(key, tt);
@@ -27,11 +24,10 @@ class TransactionTypeService {
     }
   }
   async updateTransactionTypeById(id, data) {
-    const tt =
-      await transactionTypeRepository.updateTransactionTypeById(
-        id,
-        data
-      );
+    const tt = await transactionTypeRepository.updateTransactionTypeById(
+      id,
+      data
+    );
     if (tt) {
       const key = `TT::${id}`;
       await deleteRedisKey(key);

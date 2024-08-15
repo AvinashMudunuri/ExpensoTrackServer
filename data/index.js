@@ -1,7 +1,7 @@
-const categories = require("./categories");
-const transactionTypes = require("./types");
+const categories = require('./categories');
+const transactionTypes = require('./types');
 
 module.exports = {
   categories,
-  transactionTypes
-}
+  transactionTypes,
+};

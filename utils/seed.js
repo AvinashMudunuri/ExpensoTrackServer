@@ -1,33 +1,37 @@
 const TransactionCategory = require('../domain/models/transactionCategory');
-const TransactionType= require('../domain/models/transactionType');
-const { connectDB, connectTestDB, connectProdDB, disconnectDB } = require('../infrastructure/database');
+const TransactionType = require('../domain/models/transactionType');
+const {
+  connectDB,
+  connectTestDB,
+  connectProdDB,
+  disconnectDB,
+} = require('../infrastructure/database');
 const { serverLogger } = require('../infrastructure/logger');
 const { categories, transactionTypes } = require('../data/index');
 const config = require('../config/config');
 
 // Access command-line arguments
 const args = process.argv.slice(2);
-const DOMAIN_ARG = args.find(arg => arg.startsWith('domain='));
+const DOMAIN_ARG = args.find((arg) => arg.startsWith('domain='));
 const DOMAIN = DOMAIN_ARG ? DOMAIN_ARG.split('=')[1] : undefined;
 const ENVIRONMENT = config.env;
 
 const databaseMapper = {
-  'test': connectTestDB,
-  'production': connectProdDB,
-  'default': connectDB
+  test: connectTestDB,
+  production: connectProdDB,
+  default: connectDB,
 };
 
 const domainMapper = {
-  'Category': {
+  Category: {
     model: TransactionCategory,
-    data: categories
+    data: categories,
   },
-  "Type": {
+  Type: {
     model: TransactionType,
-    data: transactionTypes 
-  }
+    data: transactionTypes,
+  },
 };
-
 
 async function seedDatabase() {
   try {

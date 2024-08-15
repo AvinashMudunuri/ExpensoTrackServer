@@ -21,7 +21,11 @@ router.get(
   cacheMiddleware('TC'),
   async (req, res, next) => {
     try {
-      await transactionCategoryController.getTransactionCategoryById(req, res, next);
+      await transactionCategoryController.getTransactionCategoryById(
+        req,
+        res,
+        next
+      );
     } catch (err) {
       next(err);
     }
@@ -34,7 +38,11 @@ router.put(
   grantAccess('updateOwn', 'expense'),
   async (req, res, next) => {
     try {
-      await transactionCategoryController.updateTransactionCategoryById(req, res, next);
+      await transactionCategoryController.updateTransactionCategoryById(
+        req,
+        res,
+        next
+      );
     } catch (err) {
       next(err);
     }
@@ -47,7 +55,11 @@ router.delete(
   grantAccess('deleteOwn', 'expense'),
   async (req, res, next) => {
     try {
-      await transactionCategoryController.deleteTransactionCategoryById(req, res, next);
+      await transactionCategoryController.deleteTransactionCategoryById(
+        req,
+        res,
+        next
+      );
     } catch (err) {
       next(err);
     }
