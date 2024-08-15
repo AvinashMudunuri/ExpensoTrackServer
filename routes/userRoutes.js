@@ -24,7 +24,7 @@ router.get(
   '/:id',
   auth,
   grantAccess('readOwn', 'profile'),
-  cacheMiddleware('user'),
+  cacheMiddleware('USER'),
   async (req, res, next) => {
     try {
       await userController.getUserById(req, res, next);

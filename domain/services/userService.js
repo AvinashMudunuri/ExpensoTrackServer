@@ -14,7 +14,7 @@ class UserService {
   async getUserById(id) {
     const user = await userRepository.getUserById(id);
     if (user) {
-      const key = `user::${id}`;
+      const key = `USER::${id}`;
       await setRedisKey(key, user);
       return user;
     } else {
@@ -24,7 +24,7 @@ class UserService {
   async updateUserById(id, data) {
     const user = await userRepository.updateUserById(id, data);
     if (user) {
-      const key = `user::${id}`;
+      const key = `USER::${id}`;
       await deleteRedisKey(key);
       await setRedisKey(key, user);
       return user;
@@ -35,7 +35,7 @@ class UserService {
   async deleteUserById(id) {
     const deletedUser = await userRepository.deleteUserById(id);
     if (deletedUser) {
-      const key = `user::${id}`;
+      const key = `USER::${id}`;
       await deleteRedisKey(key);
       return deletedUser;
     } else {

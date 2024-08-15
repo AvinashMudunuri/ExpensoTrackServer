@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const auth = require('../middleware/auth');
+const grantAccess = require('../middleware/grantAccess');
+const { cacheMiddleware } = require('../middleware/cache');
+
+const <%= modelName %>Controller = require('../controllers/<%= modelName %>Controller');
+
+
+module.exports = router;

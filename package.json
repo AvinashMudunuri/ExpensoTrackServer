@@ -13,7 +13,11 @@
     "lint:fix": "eslint --fix .",
     "test": "cross-env NODE_ENV=test PORT=3001 mocha --recursive",
     "test:coverage": "cross-env NODE_ENV=test PORT=3001 nyc mocha --recursive",
-    "prepare": "husky"
+    "prepare": "husky",
+    "generateModel": "node ./utils/generateDomainModel.js",
+    "seed-dev-data": "cross-env NODE_ENV=development node ./utils/seed.js",
+    "seed-test-data": "cross-env NODE_ENV=test node ./utils/seed.js",
+    "seed-prod-data": "cross-env NODE_ENV=production node ./utils/seed.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +38,7 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-rate-limit": "^7.3.1",
     "helmet": "^7.1.0",
