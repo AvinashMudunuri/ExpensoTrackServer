@@ -4,10 +4,25 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const xss = require('xss-clean');
 const morgan = require('morgan');
+const cors = require("cors");
 
 const config = require('../config/config');
 const { connectDB, connectTestDB, connectProdDB } = require('./database');
 const { apiLogger, serverLogger } = require('./logger');
+
+const whiteList = ['http://localhost:8000', 'https://super-duper-robot-4pwvgw9r7fqxg9-8000.app.github.dev'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if(whiteList.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not Allowed by CORS'));
+    }
+  },
+  methods: 'GET,POST,PUT,PATCH,HEAD,DELETE',
+  credentials: true,
+  optionSuccessStatus: 204,
+}
 
 const app = express();
 const PORT = config.port || 8000;
@@ -21,6 +36,7 @@ app.use(
     },
   })
 );
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(xss());
