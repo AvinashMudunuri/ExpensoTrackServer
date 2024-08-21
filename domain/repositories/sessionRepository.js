@@ -6,6 +6,7 @@ class SessionRepository {
     return await session.save();
   }
   async deleteSession(token) {
+    console.log(`Session Repository delete`)
     return await Session.findOneAndDelete({ token });
   }
   async findByToken(token) {

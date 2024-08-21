@@ -21,9 +21,10 @@ class UserController {
 
   async logout(req, res) {
     try {
+      console.log(`Triggered Logout`)
       const token = req.header('Authorization').replace('Bearer ', '');
       const response = await sessionService.deleteSession(token);
-      if (repsonse) {
+      if (response) {
         res.status(200).json({
           message: 'Logout Successful',
         });
