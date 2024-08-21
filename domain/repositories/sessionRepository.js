@@ -1,4 +1,5 @@
 const Session = require('../models/session');
+const { serverLogger } = require('../../infrastructure/logger');
 
 class SessionRepository {
   async createSession(data) {
@@ -6,7 +7,7 @@ class SessionRepository {
     return await session.save();
   }
   async deleteSession(token) {
-    console.log(`Session Repository delete`)
+    serverLogger.info(`Session Repository delete`)
     return await Session.findOneAndDelete({ token });
   }
   async findByToken(token) {

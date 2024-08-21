@@ -1,5 +1,7 @@
 const userService = require('../domain/services/userService');
 const sessionService = require('../domain/services/sessionService');
+const { serverLogger } = require('../infrastructure/logger');
+
 class UserController {
   async login(req, res) {
     try {
@@ -21,8 +23,8 @@ class UserController {
 
   async logout(req, res) {
     try {
-      console.log(`Triggered Logout`)
-      const token = req.header('Authorization').replace('Bearer ', '');
+      serverLogger.info(`Triggered Logout`)
+      const token = req.header('Authorization').replace('Bearer ', '');      
       const response = await sessionService.deleteSession(token);
       if (response) {
         res.status(200).json({
