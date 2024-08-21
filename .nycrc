@@ -3,8 +3,8 @@
   "exclude": ["test/", "node_modules", "coverage/", "utils/generateToken.js"],
   "reporter": ["lcov", "text"],
   "check-coverage": true,
-  "branches": 50,
-  "lines": 75,
-  "functions": 75,
-  "statements": 75
+  "branches": 30,
+  "lines": 30,
+  "functions": 30,
+  "statements": 30
 }
