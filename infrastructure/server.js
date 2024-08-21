@@ -10,7 +10,7 @@ const config = require('../config/config');
 const { connectDB, connectTestDB, connectProdDB } = require('./database');
 const { apiLogger, serverLogger } = require('./logger');
 
-const whiteList = ['http://localhost:8000', 'https://super-duper-robot-4pwvgw9r7fqxg9-8000.app.github.dev'];
+const whiteList = ['http://localhost:8000', 'https://super-duper-robot-4pwvgw9r7fqxg9-8000.app.github.dev', 'https://expensotrack.avinashmudunuri.com'];
 const corsOptions = {
   origin: function (origin, callback) {
     if(whiteList.indexOf(origin) !== -1 || !origin) {
