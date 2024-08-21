@@ -22,10 +22,14 @@ class UserController {
   async logout(req, res) {
     try {
       const token = req.header('Authorization').replace('Bearer ', '');
-      await sessionService.deleteSession(token);
-      res.status(200).json({
-        message: 'Logout Successful',
-      });
+      const response = await sessionService.deleteSession(token);
+      if (repsonse) {
+        res.status(200).json({
+          message: 'Logout Successful',
+        });
+      } else {
+        res.status(500).send({ error: 'User with this token doesnot exists' });
+      }      
     } catch (e) {
       res.status(500).json({
         error: 'Could not logout, please try again',
